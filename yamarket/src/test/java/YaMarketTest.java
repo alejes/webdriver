@@ -14,15 +14,15 @@ import static org.junit.Assert.*;
 public class YaMarketTest {
     @Test
     public void main() throws Exception {
-        File file = new File("F:\\Users\\Alexey\\Downloads\\chromedriver_win32\\chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+        // File file = new File("F:\\Users\\Alexey\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 
-        // Create a new instance of the Firefox driver
+        // Create a new instance of the Chrome driver
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
         WebDriver driver = new ChromeDriver();
 
-        // And now use this to visit Google
+        // And now use this to visit Yandex Market
         String url = "https://market.yandex.ru/product/1720217048?hid=91491&track=tabs";
         driver.get(url);
 
