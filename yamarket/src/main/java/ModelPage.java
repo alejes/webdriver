@@ -2,6 +2,7 @@ import buttons.Basket;
 import buttons.Comparison;
 import buttons.Postpone;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,7 +24,8 @@ public class ModelPage {
     private Comparison comparison;
     @NotNull
     private List<Tab> tabs;
-    private String avgPrice = null;
+    @Nullable
+    private Price avgPrice = null;
 
     private ModelPage(@NotNull String name,
                       @NotNull String shortFeatures,
@@ -56,6 +58,7 @@ public class ModelPage {
         WebElement articles = driver.findElement(By.xpath("//li[@data-name='articles']/a"));
         WebElement forums = driver.findElement(By.xpath("//li[@data-name='forums']/a"));
         String avgPrice = driver.findElement(By.xpath("//div[@class='n-w-product-average-price__average-value']/span")).getText();
+        Price avgParsedPrice = new Price(avgPrice);
 
         List<Tab> tabs = Arrays.asList(new Tab(product),
                 new Tab(specification),
@@ -66,7 +69,7 @@ public class ModelPage {
                 new Tab(forums));
 
         ModelPage obj = new ModelPage(name, about, new Basket(basket), new Postpone(postpone), new Comparison(compare), tabs);
-        obj.setAvgPrice(avgPrice);
+        obj.setAvgPrice(avgParsedPrice);
         obj.setPhoto(photo);
         return obj;
     }
@@ -99,11 +102,11 @@ public class ModelPage {
         return tabs.get(6);
     }
 
-    public String getAvgPrice() {
+    public Price getAvgPrice() {
         return avgPrice;
     }
 
-    private void setAvgPrice(String avgPrice) {
+    private void setAvgPrice(Price avgPrice) {
         this.avgPrice = avgPrice;
     }
 
